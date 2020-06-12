@@ -40,10 +40,13 @@ function versionBundle (bundleFile, tagName) {
       .src(bundleFile)
       .pipe(zip.src().on('error', reject))
       .pipe(
-        map((file, enc, next) => next(null, file), function (done) {
-          this.push(new File({ path: 'ui.yml', contents: Buffer.from(`version: ${tagName}\n`) }))
-          done()
-        })
+        map(
+          (file, enc, next) => next(null, file),
+          function (done) {
+            this.push(new File({ path: 'ui.yml', contents: Buffer.from(`version: ${tagName}\n`) }))
+            done()
+          }
+        )
       )
       .pipe(zip.dest(bundleFile))
       .on('finish', () => resolve(bundleFile))
@@ -67,9 +70,7 @@ module.exports = (dest, bundleName, owner, repo, token, updateBranch) => async (
   const readmeBlob = await octokit.git
     .createBlob({ owner, repo, content: readmeContent, encoding: 'utf-8' })
     .then((result) => result.data.sha)
-  let tree = await octokit.git
-    .getCommit({ owner, repo, commit_sha: commit })
-    .then((result) => result.data.tree.sha)
+  let tree = await octokit.git.getCommit({ owner, repo, commit_sha: commit }).then((result) => result.data.tree.sha)
   tree = await octokit.git
     .createTree({
       owner,
