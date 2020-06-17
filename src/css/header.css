@@ -100,15 +100,25 @@
   position: relative;
 }
 
-a.navbar-item.has-dropdown::after,
-.navbar-item.has-dropdown > .navbar-link::after {
+.navbar-item.has-dropdown-click label.navbar-dropper {
+  display: block;
+  padding: 0.75rem 1.25rem;
+  text-transform: uppercase;
+  letter-spacing: -0.025em;
+  position: relative;
+}
+
+.navbar-item.has-dropdown-click label.navbar-dropper::after {
   content: "";
   position: absolute;
   background: url(../img/caret-down.svg) no-repeat 50% 50%;
   width: 0.875rem;
-  height: 0.625rem;
   height: 1rem;
   margin-left: 0.25rem;
+}
+
+.navbar-item.has-dropdown-click input.navbar-dropper {
+  display: none;
 }
 
 .navbar-dropdown {
@@ -128,12 +138,13 @@ a.navbar-item.has-dropdown::after,
   height: 1px;
   background-color: var(--color-navbar-text);
   transform: scale3d(0, 0.9999, 0.9999);
-  transition: transform 0.3s;
+  transition: transform 0.1s;
 }
 
 .navbar-dropdown a:focus::after,
 .navbar-dropdown a:hover::after {
   transform: scale3d(1, 0.9999, 0.9999);
+  transition-duration: 0.05s;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -161,16 +172,8 @@ a.navbar-item.has-dropdown::after,
   text-transform: none;
 }
 
-.navbar-dropdown li:hover {
-  background-color: rgba(0, 0, 0, 0.3);
-}
-
 .navbar-dropdown li.heading {
   font-weight: var(--weight-bold);
-}
-
-.navbar-dropdown ul.two-cols li.heading {
-  grid-column: 1 / 3;
 }
 
 .navbar-dropdown li.current {
@@ -181,6 +184,10 @@ a.navbar-item.has-dropdown::after,
   content: "\2023";
   position: absolute;
   left: -0.75em;
+}
+
+.navbar-dropdown ul.two-cols li.heading {
+  grid-column: 1 / 3;
 }
 
 @media screen and (min-width: 1024px) {
@@ -365,13 +372,12 @@ html.is-clipped--navbar {
     display: flex;
   }
 
-  .navbar-item.has-dropdown:hover .navbar-dropdown {
+  .navbar-item.has-dropdown-click input.navbar-dropper:checked + .navbar-dropdown {
     visibility: visible;
     opacity: 1;
-    transition: opacity 0.3s 0.25s;
   }
 
-  .navbar-item.has-dropdown:hover .navbar-dropdown::before {
+  .navbar-item.has-dropdown-click input.navbar-dropper:checked + .navbar-dropdown::before {
     content: "";
     display: block;
     position: absolute;
@@ -380,9 +386,5 @@ html.is-clipped--navbar {
     left: 0;
     height: 2.5rem;
     z-index: var(--z-index-navbar-dropdown);
-  }
-
-  .navbar-item.has-dropdown:hover > .navbar-link {
-    z-index: var(--z-index-navbar-dropdown-link);
   }
 }

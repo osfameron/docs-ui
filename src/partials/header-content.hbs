@@ -2,7 +2,7 @@
   <nav class="navbar" id="topbar">
     <div class="container">
       <div class="navbar-brand">
-        <a class="navbar-item" href="https://www.couchbase.com"><img src="{{uiRootPath}}/img/logo.svg" alt="Couchbase"></a>
+        <a class="navbar-item" href="https://www.couchbase.com"><img src="{{{uiRootPath}}}/img/logo.svg" alt="Couchbase"></a>
         <button class="navbar-burger" data-target="topbar-menu">
           <span></span>
           <span></span>
@@ -11,18 +11,35 @@
       </div>
       <div id="topbar-menu" class="navbar-menu">
         <div class="navbar-start">
-          <div class="navbar-item has-dropdown">
-            <a class="navbar-link" href="{{or site.url (or siteRootUrl siteRootPath)}}">Docs</a>
+          <div class="navbar-item has-dropdown-click">
+            <label for="docs" class="navbar-dropper">Docs</label>
+            <input id="docs" class="navbar-dropper" type="checkbox">
             <div class="navbar-dropdown explore">
-              <div class="title">Couchbase Documentation Overview</div>
+              {{#with page.componentVersion.asciidoc.attributes.primary-site-url}}
+              <div class="title"><a href="{{this}}">Couchbase Docs Home</a> | <a href="{{#with (and @root.site.url @root.site.homeUrl)}}{{@root.site.url}}{{this}}{{else}}{{@root.siteRootPath}}{{/with}}">Archive</a></div>
+              {{else}}
+              <div class="title"><a href="{{#with (and site.url site.homeUrl)}}{{@root.site.url}}{{this}}{{else}}{{siteRootPath}}{{/with}}">Couchbase Docs Home</a></div>
+              {{/with}}
               <div class="cols">
                 <ul>
                   <li class="heading"><a href="{{relativize site.components.server.url}}">Server</a></li>
-                  <li><a href="{{siteRootPath}}/server/{{site.components.server.latest.version}}/n1ql/n1ql-language-reference/index.html">N1QL</a></li>
-                  <li><a href="{{siteRootPath}}/server/{{site.components.server.latest.version}}/fts/full-text-intro.html">Full Text Search</a></li>
-                  <li><a href="{{siteRootPath}}/server/{{site.components.server.latest.version}}/analytics/introduction.html">Analytics</a></li>
-                  <li><a href="{{siteRootPath}}/server/{{site.components.server.latest.version}}/eventing/eventing-overview.html">Eventing</a></li>
-                  <li><a href="{{relativize site.components.operator.url}}">Autonomous Operator</a></li>
+                  {{#with (resolvePageURL 'server:n1ql:n1lq-language-reference/index.adoc')}}
+                  <li><a href="{{relativize this}}">N1QL</a></li>
+                  {{/with}}
+                  {{#with (resolvePageURL 'server:fts:full-text-intro.adoc')}}
+                  <li><a href="{{relativize this}}">Full Text Search</a></li>
+                  {{/with}}
+                  {{#with (resolvePageURL 'server:eventing:eventing-overview.adoc')}}
+                  <li><a href="{{relativize this}}">Eventing</a></li>
+                  {{/with}}
+                  {{#with (resolvePageURL 'server:analytics:introduction.adoc')}}
+                  <li><a href="{{relativize this}}">Analytics</a></li>
+                  {{/with}}
+                  {{#with site.components.operator}}
+                  {{#unless ./origin}}
+                  <li><a href="{{relativize ./url}}">Kubernetes</a></li>
+                  {{/unless}}
+                  {{/with}}
                 </ul>
                 <ul>
                   <li class="heading">Mobile</li>
@@ -30,38 +47,46 @@
                   <li><a href="{{relativize site.components.sync-gateway.url}}">Sync Gateway</a></li>
                 </ul>
                 <ul class="two-cols">
-                  <li class="heading"><a href="{{siteRootPath}}/server/{{site.components.server.latest.version}}/sdk/overview.html">SDKs</a></li>
-                  <li><a href="{{relativize site.components.c-sdk.url}}">C</a></li>
-                  <li><a href="{{relativize site.components.dotnet-sdk.url}}">.NET</a></li>
-                  <li><a href="{{relativize site.components.go-sdk.url}}">Go</a></li>
+                  <li class="heading"><a href="{{relativize (resolvePageURL 'server:sdk:overview.adoc')}}">SDKs</a></li>
                   <li><a href="{{relativize site.components.java-sdk.url}}">Java</a></li>
+                  <li><a href="{{relativize site.components.dotnet-sdk.url}}">.NET</a></li>
                   <li><a href="{{relativize site.components.nodejs-sdk.url}}">Node.js</a></li>
-                  <li><a href="{{relativize site.components.php-sdk.url}}">PHP</a></li>
                   <li><a href="{{relativize site.components.python-sdk.url}}">Python</a></li>
+                  <li><a href="{{relativize site.components.php-sdk.url}}">PHP</a></li>
+                  <li><a href="{{relativize site.components.go-sdk.url}}">Go</a></li>
+                  <li><a href="{{relativize site.components.c-sdk.url}}">C</a></li>
+                  {{#with site.components.scala-sdk}}
+                  {{#unless ./origin}}
+                  <li><a href="{{relativize ./url}}">Scala</a></li>
+                  {{/unless}}
+                  {{else}}
                   <li><a href="{{relativize site.components.scala-sdk.url}}">Scala</a></li>
+                  {{/with}}
                 </ul>
                 <ul>
-                  <li class="heading"><a href="{{siteRootPath}}/server/{{site.components.server.latest.version}}/connectors/intro.html">Connectors</a></li>
-                  <li><a href="{{relativize site.components.elasticsearch-connector.url}}">Elasticsearch</a></li>
-                  <li><a href="{{siteRootPath}}/server/{{site.components.server.latest.version}}/connectors/hadoop-1.2/hadoop.html">Hadoop</a></li>
+                  <li class="heading"><a href="{{relativize (resolvePageURL 'server:connectors:intro.adoc')}}">Connectors</a></li>
                   <li><a href="{{relativize site.components.kafka-connector.url}}">Kafka</a></li>
                   <li><a href="{{relativize site.components.spark-connector.url}}">Spark</a></li>
-                  <li><a href="{{siteRootPath}}/server/{{site.components.server.latest.version}}/connectors/odbc-jdbc-drivers.html">ODBC/JDBC</a></li>
+                  <li><a href="{{relativize site.components.elasticsearch-connector.url}}">Elasticsearch</a></li>
+                  <li><a href="{{relativize (resolvePageURL 'server:connectors:odbc-jdbc-drivers.adoc')}}">ODBC/JDBC</a></li>
                 </ul>
               </div>
             </div>
           </div>
-          {{#if (and page.component (ne page.component.name 'home'))}}
-          {{#if (and page.component (ne page.component.name 'tutorials'))}}
-          {{#if (and page.component (ne page.component.name 'userprofile-couchbase-mobile'))}}
-          {{#if (or page.versions (ends-with page.component.name '-sdk'))}}
-          <div class="navbar-item has-dropdown">
-            <a class="navbar-link component" href="{{relativize page.componentVersion.url}}"><span class="title">{{{page.component.title}}}</span> <span class="version">{{page.componentVersion.displayVersion}}</span></a>
+          {{#if page.component}}
+          {{#if (or (eq page.component.name 'tutorials') (eq page.component.name 'userprofile-couchbase-mobile'))}}
+          <a class="navbar-item component" href="{{relativize site.components.tutorials.url}}"><span class="title">{{{site.components.tutorials.title}}}</span></a>
+          {{else if (or page.versions (ends-with page.component.name '-sdk'))}}
+          <div class="navbar-item has-dropdown-click">
+            <label for="menu-versions" class="component navbar-dropper"><span class="title">{{{page.component.title}}}</span> <span class="version">{{page.componentVersion.displayVersion}}</span></label>
+            <input id="menu-versions" class="navbar-dropper" type="checkbox">
             <div class="navbar-dropdown versions">
               <div class="cols">
                 <ul>
                   {{#each page.versions}}
                   <li{{#if (eq ./version @root.page.version)}} class="current"{{/if}}><a class="navbar-item" href="{{relativize ./url}}">{{{@root.page.component.title}}} {{./displayVersion}}</a></li>
+                  {{else}}
+                  <li class="current"><a class="navbar-item" href="{{relativize page.url}}">{{{page.component.title}}} {{page.displayVersion}}</a></li>
                   {{/each}}
                 </ul>
                 {{#if (ends-with page.component.name '-sdk')}}
@@ -74,16 +99,9 @@
               </div>
             </div>
           </div>
-          {{else}}
+          {{else if (ne page.component.name 'home')}}
           <a class="navbar-item component" href="{{relativize page.componentVersion.url}}"><span class="title">{{{page.component.title}}}</span>{{#unless (eq page.componentVersion.displayVersion 'master')}} <span class="version">{{page.componentVersion.displayVersion}}</span>{{/unless}}</a>
           {{/if}}
-          {{/if}}
-          {{/if}}
-          {{/if}}
-          {{#if (and page.component (or (eq page.component.name 'tutorials') (eq page.component.name 'userprofile-couchbase-mobile')))}}
-          <div class="navbar-item">
-            <a class="navbar-link component" href="/tutorials/index.html"><span class="title">Tutorials</span></a>
-          </div>
           {{/if}}
           {{#if env.ALGOLIA_API_KEY}}
             <form class="navbar-item search">
