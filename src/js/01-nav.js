@@ -3,7 +3,7 @@
 
   var nav = document.querySelector('nav.nav')
   var menuExpandToggle = document.querySelector('.menu-expand-toggle')
-  var versionToggle = document.querySelector('.version-link')
+  var versionToggle = document.querySelector('.clickable')
   var versionDropdownList = document.querySelector('.dropdown-box')
   var navMenu = {}
   if (!(navMenu.element = nav && nav.querySelector('.nav-menu'))) return
@@ -143,15 +143,17 @@
     }
   })
 
-  versionToggle.addEventListener('click', function (e) {
-    e.preventDefault()
-    if (versionDropdownList.classList.contains('show')) {
-      versionDropdownList.classList.remove('show')
-    } else {
-      versionDropdownList.classList.add('show')
-    }
-    concealEvent(e)
-  })
+  if (versionToggle) {
+    versionToggle.addEventListener('click', function (e) {
+      e.preventDefault()
+      if (versionDropdownList.classList.contains('show')) {
+        versionDropdownList.classList.remove('show')
+      } else {
+        versionDropdownList.classList.add('show')
+      }
+      concealEvent(e)
+    })
+  }
 
   window.addEventListener('click', function (e) {
     versionDropdownList.classList.remove('show')
@@ -172,31 +174,31 @@
   }, 100) //setTime Out end
 
   // show depth 0 child element
-  if (document.querySelector('.is-current-page')) {
-    var otherNavs = document.querySelectorAll('.nav-list > .nav-item[data-depth="0"]')
-    otherNavs.forEach(function (nav) {
-      var navSubMenu = Array.from(nav.querySelector('ul.nav-list').children)
-      // var navDataDepth = Array.from(nav.querySelector('ul.nav-list'))
-      navSubMenu.forEach(function (item) {
-        item.classList.remove('is-inactive')
-      })
+  // if (document.querySelector('.is-current-page')) {
+  //   var otherNavs = document.querySelectorAll('.nav-list > .nav-item[data-depth="0"]')
+  //   otherNavs.forEach(function (nav) {
+  //     var navSubMenu = Array.from(nav.querySelector('ul.nav-list').children)
+  //     // var navDataDepth = Array.from(nav.querySelector('ul.nav-list'))
+  //     navSubMenu.forEach(function (item) {
+  //       item.classList.remove('is-inactive')
+  //     })
 
-      // hide main menu for top level navigation -
+  //     // hide main menu for top level navigation -
 
-      // if (nav.className.includes('is-current-page')) {
-      //   navMenuControl.style.display = 'none'
-      // }
+  //     // if (nav.className.includes('is-current-page')) {
+  //     //   navMenuControl.style.display = 'none'
+  //     // }
 
-      // hide in second level menu
-      if (nav.className.includes('is-current-path')) {
-        otherNavs.forEach(function (navItem) {
-          if (!navItem.className.includes('is-current-path')) {
-            navItem.classList.add('is-inactive')
-          }
-        })
-      }
-    })
-  } // if condition end
+  //     // hide in second level menu
+  //     if (nav.className.includes('is-current-path')) {
+  //       otherNavs.forEach(function (navItem) {
+  //         if (!navItem.className.includes('is-current-path')) {
+  //           navItem.classList.add('is-inactive')
+  //         }
+  //       })
+  //     }
+  //   })
+  // } // if condition end
 
   // clearTimeout(scrollCurrentPageMenu, 20000)
 })()

@@ -6,7 +6,7 @@
   <div class="version-component">
     <h4>{{{page.component.title}}}</h4>
     <div class="version-dropdowns">
-      <a class="version-link" href="{{relativize page.componentVersion.url}}">
+      <a class="version-link clickable" href="{{relativize page.componentVersion.url}}">
         <span class="version">{{page.componentVersion.displayVersion}}</span> 
         <i class="fas fa-chevron-down"></i>
       </a>
@@ -38,7 +38,7 @@
 {{else}}
   <div class="version-component">
     <h4>{{{page.component.title}}}</h4>
-    <a class="navbar-item component" href="{{relativize page.componentVersion.url}}">
+    <a class="version-link" href="{{relativize page.componentVersion.url}}">
       {{#unless (eq page.componentVersion.displayVersion 'master')}} 
         <span class="version">{{page.componentVersion.displayVersion}}</span>
       {{/unless}}
