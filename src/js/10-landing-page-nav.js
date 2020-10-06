@@ -2,6 +2,20 @@
 (function () {
   'use strict'
 
+  var queryStringData = window.location.search
+  console.log(queryStringData)
+  var urlParams = new URLSearchParams(queryStringData)
+  var getCategory = urlParams.get('data-category')
+  console.log(getCategory)
+  var classList = getCategory.split(' ')
+  console.log(classList)
+  var urlFilters = {
+    roles: classList,
+    languages: '',
+    levels: '',
+  }
+  filterResults(urlFilters)
+
   var navLink = document.querySelectorAll('.nav-menu.filter li a')
 
   // looping through the all chekbox link
@@ -41,6 +55,7 @@
   }
 
   function filterResults (filters) {
+    console.log(filters)
     var outputElems = document.querySelectorAll('.card')
     var hiddenElems = []
 
