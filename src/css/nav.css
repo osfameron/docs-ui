@@ -22,7 +22,9 @@
 .nav-menu {
   overflow-y: auto;
   background-color: var(--color-brand-gray7);
-  height: var(--height-nav);
+  height: calc(100vh - 11rem);
+  padding: 0;
+  margin: 0;
 }
 
 .version-control-box + .nav-menu {
@@ -344,7 +346,7 @@ html.is-clipped--nav {
   color: var(--color-brand-gray1);
 }
 
-.nav-item[data-depth='1'] .in-toggle {
+.nav-item .in-toggle {
   position: absolute;
   /* left: -5px; */
   width: 0;
@@ -554,4 +556,9 @@ a.collapse-menu span {
     font-size: 14px;
     padding: 4px 10px;
   }
+}
+
+.nav-trees {
+  position: relative;
+  z-index: 91;
 }

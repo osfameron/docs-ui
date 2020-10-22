@@ -9,12 +9,21 @@
 
 .version-component {
   display: flex;
-  padding: 0 var(--base-space);
+  padding: var(--base-space);
   justify-content: space-between;
   align-items: center;
   background: var(--color-brand-gray6);
   position: relative;
+  margin: 1px 0;
   z-index: 9;
+}
+
+.version-component a.spacer {
+  color: #292b36;
+  font-size: 1rem;
+  line-height: 1.375rem;
+  font-weight: 600;
+  text-decoration: none;
 }
 
 .version-link {
@@ -24,6 +33,7 @@
   color: var(--color-brand-gray1);
   display: flex;
   align-items: center;
+  line-height: 18px;
 }
 
 .version-link:hover,

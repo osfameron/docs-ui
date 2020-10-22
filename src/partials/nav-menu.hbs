@@ -5,16 +5,45 @@
     </div>
     <div class="frame-body">
       <h4 class="title">
-        <span class="">
-          Server
-        </span>
+        <span class="">Server</span>
       </h4>
     </div>
   </div>
-  
-  <div class="nav-menu">
-    {{> nav-version-control}}
-    {{> nav-tree navigation=page.navigation level=0 crumbLevel=0 crumbAtLevel=(lookup page.breadcrumbs 0)}}
-  </div>
+  {{!-- {{log page}} --}}
+  <ul class="nav-menu">    
+  {{#each site.components}}
+    <li class="nav-tree">
+      <div class="version-component">
+        <a href="{{{relativize ./url}}}" class="{{#if (eq @root.page.url ./url)}} is-current-page{{/if}}">
+          {{{this.title}}}
+        </a>
+        <div class="version-dropdowns">
+          {{!-- {{log ../page}} --}}
+          <a class="version-link clickable">
+            <span class="version">{{this.latest.displayVersion}}</span> 
+            <i class="fas fa-chevron-down"></i>
+          </a>
+          <div class="dropdown-box">
+            <ul class="frame-dropdown-list">
+            {{#each this.versions}}
+              <li>
+                <a class="frame-item" href="{{relativize this.url}}">
+                  {{this.displayVersion}}  
+                </a>
+              </li>
+            {{/each}}
+            </ul>
+          </div>
+        </div>
+      </div>
+      {{#each this.versions}}
+        <div data-component="{{name}}" data-latest="{{../latest.version}}" data-version="{{this.version}}" class="{{#unless (eq ./version ../../page.componentVersion.displayVersion)}}hide{{/unless}}">
+          {{!-- {{> nav-tree  navigation=./navigation }} --}}
+          {{> nav-tree  navigation=./navigation level=0 crumbLevel=0 crumbAtLevel=(lookup ../../page.breadcrumbs 0)}}
+        </div>
+      {{/each}}
+    </li>
+  {{/each}}
+  </ul>
   <a href="#" class="menu-expand-toggle"> <span>Navigation</span> <i class="fas fa-times-circle"></i> <i class="fas fa-chevron-circle-left"></i></a>
 </div>
