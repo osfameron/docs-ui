@@ -60,12 +60,17 @@
                 </ul>
               </div>
               <div class="primary-action">
-                <form class="navbar-item search">
+                {{!-- <form class="navbar-item search">
                   <input type="text" placeholder="Search Docs" class="query" id="search-query" />
                   <button type="button" class="search-btn">
                     <i class="fas fa-search"></i>
                   </button>
-                </form>
+                </form> --}}
+                <div class="searchbox-wrap">
+                  <div id="searchbox" class="ais-SearchBox"></div>
+                  <div id="hits-container" class="hit-container"></div>
+                  <div id="pagination-container"></div>
+                </div>
                 {{!-- <div class="parent-site">
                   <a href="https://www.couchbase.com">
                     Couchbase.com

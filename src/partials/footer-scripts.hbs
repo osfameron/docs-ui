@@ -5,14 +5,17 @@
 <script async src="{{#unless preview}}{{{uiRootPath}}}/js/vendor/{{/unless}}fontawesome-icon-defs.js"></script>
 <script async src="{{{uiRootPath}}}/js/vendor/fontawesome.js"></script>
 <script async src="{{{uiRootPath}}}/js/vendor/highlight.js"></script>
-{{#if env.ALGOLIA_API_KEY}}
-<script async id="search-script" src="{{{uiRootPath}}}/js/vendor/docsearch.js"
-{{~#if env.ALGOLIA_APP_ID}} data-app-id="{{env.ALGOLIA_APP_ID}}" {{/if~}}
-data-api-key="{{env.ALGOLIA_API_KEY}}" data-index-name="{{env.ALGOLIA_INDEX_NAME}}" data-stylesheet="{{{uiRootPath}}}/css/vendor/docsearch.css"></script>
-{{/if}}
+{{!-- {{#if env.ALGOLIA_API_KEY}} --}}
+{{!-- <script async id="search-script" src="{{{uiRootPath}}}/js/vendor/docsearch.js"
+data-app-id="NI1G57N08Q" data-api-key="d3eff3e8bcc0860b8ceae87360a47d54" data-index-name="prod_docs_couchbase" data-stylesheet="{{{uiRootPath}}}/css/vendor/docsearch.css"></script> --}}
+{{!-- {{/if}} --}}
 {{#if (eq page.layout 'tutorials')}}
 <script async src="{{{uiRootPath}}}/js/vendor/mark.js"></script>
 {{/if}}
 {{#if (eq env.SHOW_FEEDBACK_BUTTON 'true')}}
 <script async id="feedback-script" src="{{{uiRootPath}}}/js/vendor/feedback.js?v=1" data-collector-id="709818cb"></script>
 {{/if}}
+<script src="https://cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4"></script>
+
+<script src="{{{uiRootPath}}}/js/vendor/appSearch.js"></script>

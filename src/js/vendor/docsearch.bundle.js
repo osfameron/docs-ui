@@ -12,7 +12,7 @@
       appId: config.appId,
       apiKey: config.apiKey,
       indexName: config.indexName,
-      inputSelector: '#search-query',
+      inputSelector: '#searchbox',
       algoliaOptions: { hitsPerPage: 25 },
       debug: false,
     })
