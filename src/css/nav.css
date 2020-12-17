@@ -675,3 +675,10 @@ a.collapse-menu span {
 .pointer {
   cursor: pointer;
 }
+
+.group-name {
+  padding: 15px 20px 15px 60px;
+  text-transform: capitalize;
+  font-weight: 600;
+  background: #d9ecfd url(../img/server-icon.png) no-repeat 20px center /35px;
+}
