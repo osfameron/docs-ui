@@ -1,33 +1,16 @@
 ;(function () {
   'use strict'
 
-  var nav = document.querySelector('nav.nav')
-  var menuExpandToggle = document.querySelector('.menu-expand-toggle')
-  var navMenu = {}
-  if (!(navMenu.element = nav && nav.querySelector('.nav-menu'))) return
-  var navControl
-  // var currentPageItem = navMenu.element.querySelector('.is-current-page')
+  // expand nav to show current page
+  var currentPageItem = Array.from(document.querySelectorAll('.is-current-page')).pop().parentNode
+  console.log(currentPageItem)
+  expandParents(currentPageItem)
 
-  // NOTE prevent text from being selected by double click
-  navMenu.element.addEventListener('mousedown', function (e) {
-    if (e.detail > 1) e.preventDefault()
-  })
-
-  find(/*'.nav-toggle',*/ '.in-toggle', navMenu.element).forEach(function (toggleBtn) {
-    // console.log(toggleBtn, 17)
-    var navItem = findAncestorWithClass('nav-item', toggleBtn, navMenu.element)
-    toggleBtn.addEventListener('click', toggleActive.bind(navItem))
-    // var dataDepth = toggleBtn.getAttribute('data-depth')
-    // if (dataDepth === 1) {
-    //   toggleBtn.classList.add("mystyle")
-    // }
-    // toggleBtn.addEventListener('click', addActive.bind(navItem))
-
-    var navItemSpan = findNextElement(toggleBtn)
-    if (navItemSpan.classList.contains('nav-text')) {
-      navItemSpan.style.cursor = 'pointer'
-      navItemSpan.addEventListener('click', toggleActive.bind(navItem))
-      // navItemSpan.addEventListener('click', addActive.bind(navItem))
+  function expandParents (element) {
+    var panel = element.parentNode
+    console.log(panel)
+    if (!panel.matches('.nav-children-panel')) {
+      return
     }
     var parentHeader = panel.previousElementSibling
     console.log(parentHeader)
