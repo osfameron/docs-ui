@@ -61,16 +61,36 @@
               </div>
               <div class="primary-action">
                 {{!-- <form class="navbar-item search">
-                  <input type="text" placeholder="Search Docs" class="query" id="search-query" />
+                  <input type="text" placeholder="Search Docs" class="query" id="searchbox" />
                   <button type="button" class="search-btn">
                     <i class="fas fa-search"></i>
                   </button>
                 </form> --}}
                 <div class="searchbox-wrap">
                   <div id="searchbox" class="ais-SearchBox"></div>
-                  <div id="hits-container" class="hit-container"></div>
-                  <div id="pagination-container"></div>
+                  <div class="result__container--outer">
+                    <div class="result__container--inner">
+                      <div id="hits-container" class="hit-container"></div>
+                      <div class="ais-panel">
+                        <div class="ais-panel-header"><h3>Filter</h3></div>
+                        <div id="refinement-list" >
+                          <div class="ais-panel-header"><h4>Component</h4></div>
+                          <div id="aisPanelBody" class="ais-panel-body"></div>
+                        </div>
+                        {{!-- <div id="refinement-version">
+                          <div class="ais-panel-header"><h4>Version</h4></div>
+                          <div id="aisVersionBody" class="ais-panel-body"></div>
+                        </div> --}}
+                        <div id="refinement-version">
+                          <div class="ais-panel-header"><h4>Version</h4></div>
+                          <div id="aisVersionBody1" class="ais-panel-body"></div>
+                        </div>
+                      </div>
+                    </div>
+                    <div id="pagination-container"></div>
+                  </div>                  
                 </div>
+                
                 {{!-- <div class="parent-site">
                   <a href="https://www.couchbase.com">
                     Couchbase.com

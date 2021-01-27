@@ -97,8 +97,10 @@
   function hashScroll () {
     // element which needs to be scrolled to
     var hasValue = window.location.hash
-    var elementTillScroll = document.querySelector(hasValue)
-    // scroll to element
-    elementTillScroll.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    if (hasValue) {
+      var elementTillScroll = document.querySelector(hasValue)
+      // scroll to element
+      elementTillScroll.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }
   }
 })()
