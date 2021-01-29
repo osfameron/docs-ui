@@ -3,6 +3,17 @@ site:
   title: Couchbase Docs
   url: http://localhost:5252
   homeUrl: &home_url /home.html
+  keys:
+    navGroups: |
+      - title: Server
+        startPage: home::server.adoc
+        components: [server, '*-connector']
+      - title: Mobile
+        startPage: home::mobile.adoc
+        components: [couchbase-lite, sync-gateway]
+      - title: Cloud
+        startPage: home::cloud.adoc
+        components: [operator]
   components:
     server:
       versions:
