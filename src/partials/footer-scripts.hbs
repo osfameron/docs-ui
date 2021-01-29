@@ -1,5 +1,8 @@
 {{!-- may pass this path to site.js and have it load the navigation data --}}
 <script src="{{siteRootPath}}/site-navigation-data.js"></script>
+<script>
+window.siteNavigationGroups = {{{stringify (compile-nav-groups)}}}
+</script>
 <script src="{{{uiRootPath}}}/js/site.js"></script>
 {{#with page.attributes.content-scripts}}
 {{{this}}}

@@ -1,6 +1,16 @@
 ;(function () {
   'use strict'
 
+  var siteNavigationData = window.siteNavigationData.reduce(function (accum, entry) {
+    accum[entry.name] = entry
+    return accum
+  }, {})
+  window.siteNavigationGroups.forEach(function (group) {
+    group.components.forEach(function (componentName) {
+      var componentNavData = siteNavigationData[componentName]
+    })
+  })
+
   var nav = document.querySelector('nav.nav')
   var menuExpandToggle = document.querySelector('.menu-expand-toggle')
   var versionToggle = document.querySelector('.clickable')
