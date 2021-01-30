@@ -1,17 +1,51 @@
 ;(function () {
   'use strict'
 
+  var nav = document.querySelector('.nav-container-wrap')
+  var navPanels = nav.querySelector('.panels')
+  var pageUrl = document.head.querySelector('meta[name=page-url]').getAttribute('content')
+
   var siteNavigationData = window.siteNavigationData.reduce(function (accum, entry) {
-    accum[entry.name] = entry
-    return accum
+    return (accum[entry.name] = entry) && accum
   }, {})
   window.siteNavigationGroups.forEach(function (group) {
+    var groupName = document.createElement('div')
+    groupName.className = 'group-name'
+    groupName.appendChild(document.createTextNode(group.title))
+    navPanels.appendChild(groupName)
     group.components.forEach(function (componentName) {
       var componentNavData = siteNavigationData[componentName]
+      var navTrees = document.createElement('div')
+      navTrees.className = 'nav-trees'
+      var versionBox = document.createElement('div')
+      versionBox.className = 'version-box'
+      var selectVersion = document.createElement('select')
+      selectVersion.className = 'select-version'
+      componentNavData.versions.forEach(function(version) {
+        var versionOption = document.createElement('option')
+        versionOption.value = version.version
+        versionOption.appendChild(document.createTextNode(version.displayVersion || version.version))
+        selectVersion.appendChild(versionOption)
+      })
+      versionBox.appendChild(selectVersion)
+      navTrees.appendChild(versionBox)
+      componentNavData.versions.forEach(function(version) {
+        var navTree = document.createElement('div')
+        var navItem = document.createElement('div')
+        navItem.className = 'nav-item is-link nav-top'
+        var navTitle = document.createElement('a')
+        // FIXME: this should be component version url
+        navTitle.href = relativize(pageUrl, '/' + componentNavData.name + '/current/index.html')
+        navTitle.appendChild(document.createTextNode(componentNavData.title))
+        navItem.appendChild(navTitle)
+        navTree.appendChild(navItem)
+        navTrees.appendChild(navTree)
+      })
+      navPanels.appendChild(navTrees)
     })
   })
 
-  var nav = document.querySelector('nav.nav')
+  return
   var menuExpandToggle = document.querySelector('.menu-expand-toggle')
   var versionToggle = document.querySelector('.clickable')
   var versionDropdownList = document.querySelector('.frame-dropdown')
@@ -157,4 +191,49 @@
   } // if condition end
 
   // clearTimeout(scrollCurrentPageMenu, 20000)
+
+  function relativize (from, to) {
+    if (!(from && to.charAt() === '/')) return to
+    var hash = ''
+    var hashIdx = to.indexOf('#')
+    if (~hashIdx) {
+      hash = to.substr(hashIdx)
+      to = to.substr(0, hashIdx)
+    }
+    if (from === to) {
+      return hash || (to.charAt(to.length - 1) === '/' ? './' : to.substr(to.lastIndexOf('/') + 1))
+    } else {
+      return (
+        (computeRelativePath(from.slice(0, from.lastIndexOf('/')), to) || '.') +
+        (to.charAt(to.length - 1) === '/' ? '/' + hash : hash)
+      )
+    }
+  }
+
+  function computeRelativePath (from, to) {
+    var fromParts = trimArray(from.split('/'))
+    var toParts = trimArray(to.split('/'))
+    for (var i = 0, l = Math.min(fromParts.length, toParts.length), sharedPathLength = l; i < l; i++) {
+      if (fromParts[i] !== toParts[i]) {
+        sharedPathLength = i
+        break
+      }
+    }
+    var outputParts = []
+    for (var remain = fromParts.length - sharedPathLength; remain > 0; remain--) outputParts.push('..')
+    return outputParts.concat(toParts.slice(sharedPathLength)).join('/')
+  }
+
+  function trimArray (arr) {
+    var start = 0
+    var length = arr.length
+    for (; start < length; start++) {
+      if (arr[start]) break
+    }
+    if (start === length) return []
+    for (var end = length; end > 0; end--) {
+      if (arr[end - 1]) break
+    }
+    return arr.slice(start, end)
+  }
 })()
