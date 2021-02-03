@@ -27,13 +27,17 @@ ul {
 .components {
   height: calc(100vh - 7.1rem);
   overflow-y: auto;
-}
+  scrollbar-width: thin;
+} 
 
 .components::-webkit-scrollbar {
   width: 0.25rem;
 }
+.components::-moz-scrollbar {
+  scrollbar-width: thin;
+}
 
-.components::-webkit-scrollbar-thumb {
+.components::-webkit-scrollbar-thumb{
   background-color: var(--color-border);
 }
 
@@ -51,7 +55,6 @@ ul {
 
 .version_list {
   height: 30px;
-  padding: 5px;
 }
 
 .component_list_title {
