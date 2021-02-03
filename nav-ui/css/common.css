@@ -24,3 +24,10 @@
     padding: 8px 25px;
   }
 }
+
+.svg-inline--fa.fa-w-14 {
+  width: 0.875em;
+}
+.svg-inline--fa.fa-w-18 {
+  width: 1.125em;
+}
