@@ -2,6 +2,9 @@
 <script src="{{siteRootPath}}/site-navigation-data.js"></script>
 <script>
 window.siteNavigationGroups = {{{stringify (compile-nav-groups)}}}
+{{#if page.component}}
+window.pageNavigationGroup = "{{{lookup (nav-group) 'title'}}}"
+{{/if}}
 </script>
 <script src="{{{uiRootPath}}}/js/site.js"></script>
 {{#with page.attributes.content-scripts}}
