@@ -69,8 +69,15 @@
                 <div class="searchbox-wrap">
                   <div id="searchbox" class="ais-SearchBox"></div>
                   <div class="result__container--outer">
+                    <div class="hit-title">
+                      <div class="query">
+                        Search result for: 
+                        <span id="queryText" class="query-text"></span>
+                      </div>
+                      <span id="stats"></span>
+                    </div>
                     <div class="result__container--inner">
-                      <div id="hits-container" class="hit-container"></div>
+                      <div id="hits" class="hit-container"></div>
                       <div class="ais-panel">
                         <div class="ais-panel-header"><h3>Filter</h3></div>
                         <div id="refinement-list" >
@@ -87,7 +94,7 @@
                         </div>
                       </div>
                     </div>
-                    <div id="pagination-container"></div>
+                    <div id="pagination"></div>
                   </div>                  
                 </div>
                 

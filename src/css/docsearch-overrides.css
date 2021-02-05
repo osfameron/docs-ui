@@ -73,12 +73,13 @@
 
 
 .result__container--outer {
-  width: 500%;
+  width: 300%;
   position: absolute;
-  left: -400%;
+  left: -200%;
   background: #fff;
-  padding: 20px;
+  padding: 5px 20px 20px;
   box-shadow: 0px 3px 5px 0px #ccc;
+  display: none;
 }
 
 .result__container--inner {
@@ -92,12 +93,20 @@
   flex-wrap: wrap;
 }
 
+.hit-container,
+.ais-panel {
+  height: 100%;
+  display: block;
+  overflow: auto;
+}
 
-.result__container--inner::-webkit-scrollbar {
+.hit-container::-webkit-scrollbar,
+.ais-panel::-webkit-scrollbar {
   width: 0.25rem;
 }
 
-.result__container--inner::-webkit-scrollbar-thumb {
+.hit-container::-webkit-scrollbar-thumb,
+.ais-panel::-webkit-scrollbar-thumb {
   background-color: var(--color-border);
 }
 
@@ -106,13 +115,13 @@
   border: 1px solid #d9d9d9;
   padding: 15px 20px;
   margin-right: 2%;
-  display: inline-table;
+  /* display: inline-table; */
 }
 
 .ais-panel {
   width: 30%;
   border: 1px solid #d9d9d9;
-  padding: 0 20px 15px;
+  padding: 0 15px 15px;
 }
 
 .ais-RefinementList-list {
@@ -139,6 +148,7 @@
 .ais-RefinementList-count {
   font-size: 12px;
   margin-left: 5px;
+  display: none;
   position: relative;
 }
 
@@ -152,4 +162,56 @@
 
 .ais-RefinementList-item {
   margin: 5px 0;
+  font-size: 14px;
+  text-transform: capitalize;
+}
+
+.ais-SearchBox-input {
+  border: none;
+  border-bottom: 1px solid #c8cbdf;
+  color: #73768a;
+  width: 300px;
+  font-size: 1rem;
+  line-height: 1.5;
+  padding-right: 20px;
+}
+
+button.ais-SearchBox-submit {
+  background: no-repeat;
+  border: none;
+  margin-left: -20px;
+}
+
+.ais-SearchBox-submitIcon {
+  width: 15px;
+  height: 15px;
+}
+
+.hit-title {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+}
+
+.query {
+  font-weight: 600;
+  font-style: italic;
+  font-size: .9rem;
+}
+
+.query-text {
+  font-weight: 500;
+}
+
+.ais-Stats-text{
+  font-size: .8rem;
+  color: #3a4570;
+  font-style: italic;
+}
+
+@media all and (max-width:1200px) {
+  .result__container--outer {
+    width: 400%;
+    left: -300%;
+  }
 }
