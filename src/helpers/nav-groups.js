@@ -1,6 +1,5 @@
 'use strict'
 
-const { inspect } = require('util')
 const yaml = require('js-yaml')
 
 module.exports = ({ data: { root: { contentCatalog, site } } }) => {
@@ -22,11 +21,15 @@ module.exports = ({ data: { root: { contentCatalog, site } } }) => {
     if (!componentsInGroup.length) return accum
     let startPage = navGroup.startPage
     if (startPage) {
-      startPage = contentCatalog ? contentCatalog.resolvePage(startPage) : { url: '/index.html' }
-      if (startPage) navGroup.url = startPage.url
+      startPage = contentCatalog && contentCatalog.resolvePage(startPage)
+      if (startPage) navGroup.url = startPage.pub.url
       delete navGroup.startPage
     }
     navGroup.components = componentsInGroup
+    navGroup.latestVersions = componentsInGroup.reduce((latestVersionMap, it) => {
+      latestVersionMap[it] = components[it].latest.version
+      return latestVersionMap
+    }, {})
     return accum.concat(navGroup)
   }, [])
   navGroups._compiled = true
