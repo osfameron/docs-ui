@@ -209,9 +209,9 @@ button.ais-SearchBox-submit {
   font-style: italic;
 }
 
-@media all and (max-width:1200px) {
+@media all and (max-width:1199px) {
   .result__container--outer {
-    width: 400%;
-    left: -300%;
+    width: 170%;
+    left: -70%;
   }
 }
