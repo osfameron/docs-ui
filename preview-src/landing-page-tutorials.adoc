@@ -17,14 +17,13 @@ icon:book-reader[set= fas]
 // add filter keywords as a class with card class.
 [.card.beginner.java.nodejs.dotnet.developer]
 
-=== Developer Bootstrap Exercises
+=== Developer
 
-[.tut-metadata]
-==== {empty}
-[.tut-level]
-Beginner
-[.developer]
-Developer
+[.card-level]
+[.level]#signal# [.level]#signal# [.level]#signal# Beginner
+
+[.title]
+==== Developer Bootstrap Exercises
 
 [.tut-content]
 ==== {empty}
@@ -44,15 +43,16 @@ xref:quick-start:quickstart-docker-image-manual-cb65.adoc[Start Here]
 * Node.js
 * .NET
 
-[.card.beginner.java.nodejs.developer]
-=== Get Started with Community Edition
+// card 2
 
-[.tut-metadata]
-==== {empty}
-[.tut-level]
-Beginner
-[.developer]
-Developer
+[.card.beginner.java.nodejs.developer]
+=== Developer 
+
+[.card-level]
+[.level]#signal# [.level]#signal# [.level]#signal# Beginner
+
+[.title]
+==== Get Started with Community Edition
 
 [.tut-content]
 ==== {empty}
@@ -72,15 +72,16 @@ xref:getting-started-ce:index.adoc[Start Here]
 * Java
 * Node.js
 
-[.card.beginner.swift.mobile.developer]
-=== Get Started with Couchbase Mobile on iOS
+// card 3
 
-[.tut-metadata]
-==== {empty}
-[.tut-level]
-Beginner
-[.developer]
-Mobile Developer
+[.card.intermediate.swift.mobile.developer]
+=== Mobile Developer 
+
+[.card-level]
+[.level]#signal# [.level]#signal# [.level]#signal# Intermediate
+
+[.title]
+==== Get Started with Couchbase Mobile on iOS
 
 [.tut-content]
 ==== {empty}
@@ -106,15 +107,16 @@ The series of tutorials demonstrates the core capabilities of Couchbase Mobile w
 .Languages
 * Swift
 
-[.card.beginner.android.mobile.developer]
-=== Get Started with Couchbase Mobile on Android
+// card 4
 
-[.tut-metadata]
-==== {empty}
-[.tut-level]
-Beginner
-[.developer]
-Mobile Developer
+[.card.advanced.android.mobile.developer]
+=== Mobile Developer
+
+[.card-level]
+[.level]#signal# [.level]#signal# [.level]#signal# Advanced
+
+[.title]
+==== Get Started with Couchbase Mobile on Android
 
 [.tut-content]
 ==== {empty}

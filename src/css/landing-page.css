@@ -31,7 +31,7 @@
 }
 
 .doc.landing-page-doc p {
-  font-size: 1rem;
+  /* font-size: 1rem; */
   /* color: var(--color-brand-black); */
   font-family: "Open Sans", sans-serif;
 }
@@ -369,28 +369,82 @@
 
 .landing-page-doc .sectionbody {
   display: flex;
-  align-items: flex-start;
   margin-top: 1.25rem;
   flex-wrap: wrap;
+  align-items: stretch;
+  margin-left: -1.0625rem;
+  margin-right: -1.0625rem;
 }
 
 .landing-page-doc .card {
-  flex-basis: calc(50% - 20px);
+  flex-basis: calc(36% - 63px);
   margin-bottom: 1.75rem;
-}
-
-.landing-page-doc .card:nth-child(odd) {
-  margin-right: 1.25rem;
+  box-shadow: 0 3px 10px #00001a;
+  border-radius: 6px;
+  margin-right: 1.0625rem;
+  margin-left: 1.0625rem;
+  padding-bottom: 20px;
 }
 
 .landing-page-doc .card h3 {
-  color: var(--color-brand-blue-secondary);
+  color: var(--color-brand-white);
+  background: var(--color-brand-light-blue);
+  border-radius: 4px 4px 0 0;
+  padding: 15px;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
 }
 
-.landing-page-doc .tut-metadata {
+.landing-page-doc .card .sect3 {
+  padding: 0 15px;
+}
+
+.landing-page-doc .card-level {
+  padding: 0 15px;
+}
+
+.landing-page-doc .card-level p {
   display: flex;
-  align-items: center;
-  margin: 1rem 0;
+  align-items: flex-end;
+  font-size: 14px;
+  line-height: 1;
+}
+
+.landing-page-doc .card-level .level {
+  font-size: 0;
+  width: 3px;
+  border-radius: 1px;
+  border: 0.5px solid #73768a;
+  margin-right: 2px;
+  margin-bottom: 1px;
+}
+
+.landing-page-doc .card-level .level:nth-child(1) {
+  height: 5px;
+}
+
+.landing-page-doc .card-level .level:nth-child(2) {
+  height: 8px;
+}
+
+.landing-page-doc .card-level .level:nth-child(3) {
+  height: 11px;
+  margin-right: 4px;
+}
+
+.landing-page-doc .beginner .card-level .level:nth-child(1) {
+  background: #73768a;
+}
+
+.landing-page-doc .intermediate .card-level .level:nth-child(1),
+.landing-page-doc .intermediate .card-level .level:nth-child(2) {
+  background: #73768a;
+}
+
+.landing-page-doc .advanced .card-level .level:nth-child(1),
+.landing-page-doc .advanced .card-level .level:nth-child(2),
+.landing-page-doc .advanced .card-level .level:nth-child(3) {
+  background: #73768a;
 }
 
 .tut-metadata h4,
@@ -399,9 +453,20 @@
   display: none;
 }
 
-.tut-metadata .paragraph { margin-top: 0 !important; }
+.landing-page-doc .title {
+  margin: 8px 0 10px;
+}
 
-.tut-metadata .tut-level { margin-right: 1rem; }
+.landing-page-doc .title h4 {
+  font-size: 1.125rem;
+  color: var(--color-brand-blue);
+  line-height: 25px;
+}
+
+.tut-content {
+  font-size: 14px;
+  line-height: 20px;
+}
 
 .tut-list {
   display: flex;
