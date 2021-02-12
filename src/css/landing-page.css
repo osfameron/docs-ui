@@ -1,10 +1,24 @@
 /* Landing Page CSS  */
 
+.doc-tutorials h1,
+.doc-tutorials h2,
+.doc-tutorials h3,
+.doc-tutorials h4,
+.doc-tutorials h5,
+.doc-tutorials h6 {
+  margin: 0;
+  padding: 0;
+}
+
 .doc.landing-page-doc h1 {
   color: var(--color-brand-gray1);
   font-size: 2.5rem;
   font-weight: var(--weight-semibold);
   margin-bottom: 15px;
+}
+
+.doc-tutorials h2 {
+  margin-top: var(--base-extra-large-space);
 }
 
 .doc.landing-page-doc h1.sect0 {
@@ -343,7 +357,6 @@
   list-style: none;
 }
 
-
 .landing-page-doc .col-2 {
   display: flex;
   align-items: center;
@@ -403,10 +416,6 @@
   margin: 0;
   color: var(--color-brand-black);
 }
-
-
-
-/* Responsive CSS  */
 
 @media screen and (max-width: 1169px) {
   .card-row.three-column-row .column {
@@ -470,9 +479,10 @@
   }
 
   .landing-page-doc .card {
-    flex-basis : 100%;
+    flex-basis: 100%;
     margin-right: 0;
   }
+
   .landing-page-doc .col-2 .paragraph {
     width: 100%;
     margin: 0.75rem 0;

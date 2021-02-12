@@ -2,18 +2,19 @@
   'use strict'
 
   var queryStringData = window.location.search
-  console.log(queryStringData)
-  var urlParams = new URLSearchParams(queryStringData)
-  var getCategory = urlParams.get('data-category')
-  console.log(getCategory)
-  var classList = getCategory.split(' ')
-  console.log(classList)
-  var urlFilters = {
-    roles: classList,
-    languages: '',
-    levels: '',
+  if (queryStringData) {
+    var urlParams = new URLSearchParams(queryStringData)
+    var getCategory = urlParams.get('data-category')
+    console.log(getCategory)
+    var classList = getCategory.split(' ')
+    console.log(classList)
+    var urlFilters = {
+      roles: classList,
+      languages: '',
+      levels: '',
+    }
+    filterResults(urlFilters)
   }
-  filterResults(urlFilters)
 
   var navLink = document.querySelectorAll('.nav-menu.filter li a')
 
