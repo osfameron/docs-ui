@@ -1,0 +1,40 @@
+.article-pagination {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 30px;
+}
+
+.article-pagination a:hover {
+  text-decoration: none;
+}
+
+.article-pagination .prev,
+.article-pagination .next {
+  padding: 12px;
+  border-radius: 3px;
+  border: 1px solid #0074e0;
+}
+
+.change-page {
+  display: flex;
+}
+
+.change-page .arrow-prev {
+  margin-right: 15px;
+}
+
+.change-page .arrow-next {
+  margin-left: 15px;
+}
+
+.change-page .label {
+  color: #cdd3d9;
+  font-size: small;
+}
+
+.change-page .title {
+  color: #0074e0;
+  font-size: 0.9375rem;
+  font-weight: 400;
+}
