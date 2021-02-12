@@ -379,7 +379,7 @@
 .landing-page-doc .card {
   flex-basis: calc(36% - 63px);
   margin-bottom: 1.75rem;
-  box-shadow: 0 3px 10px #00001a;
+  box-shadow: 0 3px 10px #0000001a;
   border-radius: 6px;
   margin-right: 1.0625rem;
   margin-left: 1.0625rem;
