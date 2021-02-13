@@ -39,9 +39,11 @@
                     </a>
                   </li>
                   {{#each (nav-groups)}}
+                  {{#if ./url}}
                   <li class="nav-item">
                     <a class="nav-link" href="{{relativize ./url}}">{{{./title}}}</a>
                   </li>
+                  {{/if}}
                   {{/each}}
                   <li class="nav-item">
                     <a class="nav-link" href="{{relativize site.components.tutorials.url}}">
