@@ -2,5 +2,5 @@
 
 module.exports = (navGroups, { data: { root: { page, site } } }) => {
   const pageComponentName = page.component.name
-  return navGroups.find(({ components }) => components.includes(pageComponentName))
+  return navGroups.find(({ components }) => ~components.indexOf(pageComponentName))
 }
