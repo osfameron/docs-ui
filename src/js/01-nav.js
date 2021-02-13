@@ -23,8 +23,15 @@
 
   function buildNav (container, page, group, navData) {
     var groupEl = createElement('div', 'components')
-    var groupNameEl = createElement('div', 'components-name')
-    groupNameEl.appendChild(document.createTextNode(group.title))
+    var groupNameEl = createElement('div', 'components_group-title')
+    if (group.url) {
+      var groupLinkEl = createElement('a')
+      groupLinkEl.href = relativize(page.url, group.url)
+      groupLinkEl.appendChild(document.createTextNode(group.title))
+      groupNameEl.appendChild(groupLinkEl)
+    } else {
+      groupNameEl.appendChild(document.createTextNode(group.title))
+    }
     groupEl.appendChild(groupNameEl)
     var componentsListEl = createElement('ul', 'components_list')
     group.components.forEach(function (componentName) {
@@ -36,19 +43,21 @@
       var componentTitleEl = createElement('span', 'component_list_title')
       componentTitleEl.appendChild(document.createTextNode(componentNavData.title))
       componentVersionsEl.appendChild(componentTitleEl)
-      var componentVersionsSelectEl = createElement('select', 'version_list')
-      componentNavData.versions.forEach(function (componentVersion) {
-        var optionEl = createElement('option')
-        optionEl.value = componentVersion.version
-        if (componentVersion.version === selectedVersion) optionEl.setAttribute('selected', '')
-        optionEl.appendChild(document.createTextNode(componentVersion.displayVersion || componentVersion.version))
-        componentVersionsSelectEl.appendChild(optionEl)
-      })
-      componentVersionsEl.appendChild(componentVersionsSelectEl)
+      if (selectedVersion !== 'master') {
+        var componentVersionSelectEl = createElement('select', 'version_list')
+        componentNavData.versions.forEach(function (componentVersion) {
+          var optionEl = createElement('option')
+          optionEl.value = componentVersion.version
+          if (componentVersion.version === selectedVersion) optionEl.setAttribute('selected', '')
+          optionEl.appendChild(document.createTextNode(componentVersion.displayVersion || componentVersion.version))
+          componentVersionSelectEl.appendChild(optionEl)
+        })
+        componentVersionsEl.appendChild(componentVersionSelectEl)
+      }
       componentsListItemsEl.appendChild(componentVersionsEl)
       componentNavData.versions.forEach(function (componentVersion) {
         var componentVersionNavEl = createElement('div', 'version_items')
-        // TODO only open if no page is found
+        // TODO only open manually after building nav tree if current page is not found
         if (page.component !== componentName || page.version !== componentVersion.version) {
           componentVersionNavEl.classList.add('hide')
         }
@@ -70,6 +79,8 @@
     currentPath = currentPath.concat(navListEl)
     items.forEach(function (item) {
       var navItemEl = createElement('li', 'menu_list')
+      navItemEl.dataset.depth = currentPath.length - 1
+      var navLineEl = createElement('span', 'menu_line')
       var navTextEl
       var isCurrentPage
       if (item.url) {
@@ -78,6 +89,7 @@
         if (page.url === item.url) {
           isCurrentPage = true
           navItemEl.classList.add('is-current-page')
+          navTextEl.classList.add('is-current-page')
           currentPath.forEach(function (ancestorEl) {
             ancestorEl.classList.remove('hide')
           })
@@ -86,10 +98,14 @@
         navTextEl = createElement('span', 'menu_title menu_text')
       }
       navTextEl.innerHTML = item.content
-      navItemEl.appendChild(navTextEl)
+      navLineEl.appendChild(navTextEl)
+      navItemEl.appendChild(navLineEl)
       // FIXME we could pass some sort of forceOpen flag so hide is automatically removed
       var childNavListEl = buildNavTree(item.items, navItemEl, page, currentPath)
-      if (isCurrentPage && childNavListEl) childNavListEl.classList.remove('hide')
+      if (childNavListEl) {
+        if (isCurrentPage) childNavListEl.classList.remove('hide')
+        navItemEl.classList.add('is-parent')
+      }
       navListEl.appendChild(navItemEl)
     })
     return parent.appendChild(navListEl)
@@ -152,29 +168,40 @@
 
   // FIXME integrate into nav builder
   function activateNav (container) {
+    // NOTE prevent text from being selected by double click
+    container.addEventListener('mousedown', function (e) {
+      if (e.detail > 1 && window.getComputedStyle(e.target).cursor === 'pointer') e.preventDefault()
+    })
+
+    scrollItemToMidpoint(container.querySelector('.components'), container.querySelector('a.is-current-page'))
+
     find('.component_list_title', container).forEach(function (componentTitleEl) {
       componentTitleEl.style.cursor = 'pointer'
       componentTitleEl.addEventListener('click', function () {
         var versionEl = componentTitleEl.parentNode
         var componentVersionEl = versionEl.parentNode
-        var activeVersionEl = componentVersionEl.querySelector('.version_items:not(.hide)')
-        if (activeVersionEl) {
-          activeVersionEl.classList.add('hide')
+        var componentVersionSelectEl = componentVersionEl.querySelector('.version_list')
+        if (componentVersionSelectEl) {
+          var activeVersionEl = componentVersionEl.querySelector('.version_items:not(.hide)')
+          if (activeVersionEl) {
+            activeVersionEl.classList.add('hide')
+          } else {
+            var activateVersionEl = componentVersionEl.querySelector(
+              '.version_items[data-version="' + componentVersionSelectEl.value + '"]'
+            )
+            if (activateVersionEl) activateVersionEl.classList.remove('hide')
+          }
         } else {
-          var activateVersionEl = componentVersionEl.querySelector(
-            '.version_items[data-version="' + componentVersionEl.querySelector('.version_list').value + '"]'
-          )
-          if (activateVersionEl) activateVersionEl.classList.remove('hide')
+          componentVersionEl.querySelector('.version_items').classList.toggle('hide')
         }
       })
     })
 
     find('.menu_title', container).forEach(function (menuTitleEl) {
-      if (!menuTitleEl.nextElementSibling) return
+      if (!menuTitleEl.parentNode.nextElementSibling) return
       if (!menuTitleEl.href) menuTitleEl.style.cursor = 'pointer'
       menuTitleEl.addEventListener('click', function (e) {
-        e.preventDefault()
-        menuTitleEl.nextElementSibling.classList.toggle('hide')
+        if (!menuTitleEl.href) menuTitleEl.parentNode.nextElementSibling.classList.toggle('hide')
       })
     })
 
@@ -189,5 +216,13 @@
         if (activateVersionEl) activateVersionEl.classList.remove('hide')
       })
     })
+  }
+
+  function scrollItemToMidpoint (panel, link) {
+    if (!link) return
+    var panelRect = panel.getBoundingClientRect()
+    if (panel.scrollHeight === Math.round(panelRect.height)) return // not scrollable
+    var linkRect = link.getBoundingClientRect()
+    panel.scrollTop += Math.round(linkRect.top - panelRect.top - (panelRect.height - linkRect.height) * 0.5)
   }
 })()
