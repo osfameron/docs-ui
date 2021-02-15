@@ -377,7 +377,7 @@
 }
 
 .landing-page-doc .card {
-  flex-basis: calc(36% - 63px);
+  width: calc(36% - 63px);
   margin-bottom: 1.75rem;
   box-shadow: 0 3px 10px #0000001a;
   border-radius: 6px;
@@ -470,6 +470,7 @@
 
 .tut-list {
   display: flex;
+  flex-wrap: wrap;
 }
 
 .tut-list .ulist {
@@ -493,6 +494,10 @@
 
   .doc.landing-page-doc .sub-heading.two-column-heading .filter-info {
     margin-top: 15px;
+  }
+
+  .landing-page-doc .card {
+    width: calc(50% - 34px);
   }
 }
 
@@ -543,13 +548,12 @@
     padding-right: 0;
   }
 
-  .landing-page-doc .card {
-    flex-basis: 100%;
-    margin-right: 0;
-  }
-
   .landing-page-doc .col-2 .paragraph {
     width: 100%;
     margin: 0.75rem 0;
+  }
+
+  .landing-page-doc .card {
+    width: 100%;
   }
 }
