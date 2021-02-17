@@ -1,4 +1,5 @@
 {{#unless (eq page.attributes.pagination undefined)}}
+{{#if (eq page.attributes.topic-type 'howto')}}
 {{#if (or page.previous page.next)}}
 <nav class="article-pagination">
   {{#with page.previous}}
@@ -34,5 +35,6 @@
   </div>
   {{/with}}
 </nav>
+{{/if}}
 {{/if}}
 {{/unless}}
