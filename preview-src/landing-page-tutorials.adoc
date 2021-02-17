@@ -93,12 +93,14 @@ The series of tutorials demonstrates the core capabilities of Couchbase Mobile w
 * "Sync": use of Sync Gateway for data sync between clients.
 
 
-[.tut-list]
+[.tut-link]
 ==== {empty}
 * xref:standalone@userprofile-couchbase-mobile:userprofile:userprofile_basic.adoc[Standalone]
 * xref:query@userprofile-couchbase-mobile:userprofile:userprofile_query.adoc[Query]
 * xref:sync@userprofile-couchbase-mobile:userprofile:userprofile_sync.adoc[Sync]
 
+[.tut-list]
+==== {empty}
 .Component
 * Server 5.5
 * Couchbase Lite 2.1
@@ -128,12 +130,14 @@ The series of tutorials demonstrates the core capabilities of Couchbase Mobile w
 * "Sync": use of Sync Gateway for data sync between clients.
 
 
-[.tut-list]
+[.tut-link]
 ==== {empty}
 * xref:standalone@userprofile-couchbase-mobile:userprofile:android/userprofile_basic.adoc[Standalone]
 * xref:query@userprofile-couchbase-mobile:userprofile:android/userprofile_query.adoc[Query]
 * xref:sync@userprofile-couchbase-mobile:userprofile:android/userprofile_sync.adoc[Sync]
 
+[.tut-list]
+==== {empty}
 .Component
 * Server 5.5
 * Couchbase Lite 2.6
