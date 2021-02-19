@@ -1,4 +1,4 @@
-{{#if page.component}}
+{{#if (and page.component (eq (nav-mode) 'client'))}}
 {{!-- may pass this path to site.js and have it load the navigation data itself --}}
 <script src="{{siteRootPath}}/site-navigation-data.js"></script>
 <script>
