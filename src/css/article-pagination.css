@@ -39,3 +39,23 @@
   font-size: 0.9375rem;
   font-weight: 400;
 }
+
+.code-verified {
+  font-size: 0.75rem;
+  line-height: 1;
+  color: var(--color-brand-gray4);
+  display: flex;
+  margin: 15px 0;
+}
+
+.code-verified .list {
+  border-left: 1px solid var(--color-brand-gray4);
+  padding-left: 5px;
+  margin-left: 5px;
+}
+
+.code-verified .list:first-child {
+  border: none;
+  margin: 0;
+  padding: 0;
+}
