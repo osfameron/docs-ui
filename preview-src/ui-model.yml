@@ -1,22 +1,16 @@
 antoraVersion: '2.3.1'
+navMode: template # set value to client to generate navigation on the client
 site:
   title: Couchbase Docs
   url: http://localhost:5252
   homeUrl: &home_url /home.html
   keys:
     navGroups: |
-      - title: Server
-        startPage: home::server.adoc
-        components: [server, '*-connector']
-        url: /index.html
-      - title: Mobile
-        startPage: home::mobile.adoc
-        components: [couchbase-lite, sync-gateway]
-        url: '#'
-      - title: Cloud
-        startPage: home::cloud.adoc
-        components: [operator]
-        url: '#'
+      [
+        { "title": "Server", "startPage": "home::server.adoc", "components": ["server", "*-connector"], "url": "/index.html" },
+        { "title": "Mobile", "startPage": "home::mobile.adoc", "components": ["couchbase-lite", "sync-gateway"], "url": "#" },
+        { "title": "Cloud", "startPage": "home::cloud.adoc", "components": ["operator"], "url": "#" }
+      ]
   components:
     server:
       versions:
@@ -27,6 +21,8 @@ site:
         version: '5.5'
         title: Couchbase Server
         url: /server/5.5/index.html
+        navigation:
+        - content: Introduction
       - version: '5.1'
         url: /index.html
         navigation:
@@ -143,7 +139,6 @@ site:
         url: /spark-connector/2.4/index.html
         navigation:
         - content: Spark Connector
-          url: /spark-connector/2.4/index.html
           items:
           - content: Getting Started
             url: /spark-connector/2.4/getting-started.html
@@ -151,6 +146,8 @@ site:
             url: /spark-connector/2.4/streaming-integration.html
       - version: '2.3'
         url: /spark-connector/2.3/index.html
+        navigation:
+        - content: Spark Connector
       latest: *latest_spark_connector
     couchbase-lite:
       url: /couchbase-lite/2.1/index.html
