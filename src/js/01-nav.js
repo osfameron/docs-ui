@@ -1,15 +1,13 @@
 ;(function () {
   'use strict'
 
-  var pageNavigationGroup = window.pageNavigationGroup
-  if (!pageNavigationGroup) return
-
-  var siteNavigationData = window.siteNavigationData.reduce(function (accum, entry) {
-    return (accum[entry.name] = entry) && accum
-  }, {})
-
   var navContainer = document.querySelector('.nav-container')
-  buildNav(navContainer, getPage(), pageNavigationGroup, siteNavigationData)
+  if (!navContainer.querySelector('.components')) {
+    var siteNavigationData = window.siteNavigationData.reduce(function (accum, entry) {
+      return (accum[entry.name] = entry) && accum
+    }, {})
+    buildNav(navContainer, getPage(), window.pageNavigationGroup, siteNavigationData)
+  }
   activateNav(navContainer)
 
   function getPage () {
@@ -22,7 +20,7 @@
   }
 
   function buildNav (container, page, group, navData) {
-    var groupEl = createElement('div', 'components')
+    var groupEl = createElement('div', 'components is-revealed')
     var groupNameEl = createElement('div', 'components_group-title')
     if (group.url) {
       var groupLinkEl = createElement('a')
@@ -57,11 +55,11 @@
       componentsListItemsEl.appendChild(componentVersionsEl)
       componentNavData.versions.forEach(function (componentVersion) {
         var componentVersionNavEl = createElement('div', 'version_items')
+        componentVersionNavEl.dataset.version = componentVersion.version
         // TODO only open manually after building nav tree if current page is not found
         if (page.component !== componentName || page.version !== componentVersion.version) {
           componentVersionNavEl.classList.add('hide')
         }
-        componentVersionNavEl.dataset.version = componentVersion.version
         buildNavTree(componentVersion.sets, componentVersionNavEl, page, [])
         componentsListItemsEl.appendChild(componentVersionNavEl)
       })
@@ -173,7 +171,19 @@
       if (e.detail > 1 && window.getComputedStyle(e.target).cursor === 'pointer') e.preventDefault()
     })
 
-    scrollItemToMidpoint(container.querySelector('.components'), container.querySelector('a.is-current-page'))
+    var components = container.querySelector('.components')
+
+    scrollItemToMidpoint(components, container.querySelector('a.is-current-page'))
+
+    if (!components.classList.contains('is-revealed')) {
+      find('a.is-current-page', container).forEach(function (currentPage) {
+        var childNavList = currentPage.parentNode.nextElementSibling
+        if (childNavList) childNavList.classList.remove('hide')
+        var ancestor = currentPage
+        while ((ancestor = ancestor.parentNode) && ancestor !== container) ancestor.classList.remove('hide')
+      })
+      components.classList.add('is-revealed')
+    }
 
     find('.component_list_title', container).forEach(function (componentTitleEl) {
       componentTitleEl.style.cursor = 'pointer'

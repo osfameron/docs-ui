@@ -131,7 +131,7 @@ module.exports = (src, previewSrc, previewDest, sink = () => map()) => (done) =>
               }
             },
             function (done) {
-              this.push(exportSiteNavigationData(baseUiModel.site.components))
+              if (baseUiModel.navMode === 'client') this.push(exportSiteNavigationData(baseUiModel.site.components))
               vfs
                 .src('js/vendor/fontawesome-icon-defs.js', { base: src, cwd: src })
                 .pipe(
