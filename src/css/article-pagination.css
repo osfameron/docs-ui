@@ -1,7 +1,7 @@
 .article-pagination {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: stretch;
   margin-top: 30px;
   width: 100%;
 }
@@ -15,6 +15,7 @@
   padding: 12px;
   border-radius: 3px;
   border: 1px solid #0074e0;
+  min-width: 160px;
 }
 
 .change-page {
@@ -63,5 +64,16 @@
 @media all and (max-width: 767px) {
   .code-verified {
     margin: 5px 0;
+  }
+
+  .article-pagination .prev {
+    margin-right: 10px;
+  }
+}
+
+@media all and (max-width: 480px) {
+  .article-pagination .next,
+  .article-pagination .prev {
+    min-width: 135px;
   }
 }
