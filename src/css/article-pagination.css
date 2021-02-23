@@ -59,3 +59,9 @@
   margin: 0;
   padding: 0;
 }
+
+@media all and (max-width: 767px) {
+  .code-verified {
+    margin: 5px 0;
+  }
+}
