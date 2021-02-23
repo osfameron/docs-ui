@@ -4,6 +4,7 @@
 :page-topic-type: howto
 :page-code-verified: verified
 :page-last-updated: 19 Feb 2021
+:page-pagination:
 
 [abstract]
 Collections is introduced as a Developer Preview feature in Couchbase Server 6.5.
