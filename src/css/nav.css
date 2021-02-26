@@ -63,10 +63,10 @@
 
 .version_list {
   height: 30px;
-  border-radius: 10px;
+  border-radius: 8px;
   padding: 0 10px;
   box-sizing: border-box;
-  width: 75px;
+  width: 65px;
   font-weight: 600;
 }
 
