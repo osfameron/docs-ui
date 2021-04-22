@@ -34,6 +34,7 @@
     var componentsListEl = createElement('ul', 'components_list')
     group.components.forEach(function (componentName) {
       var componentNavData = navData[componentName]
+      var hasNavTrees
       var componentsListItemsEl = createElement('li', 'components_list-items')
       var componentVersionsEl = createElement('div', 'component_list-version')
       // FIXME we would prefer if the navigation data identified the latest version itself
@@ -60,10 +61,12 @@
         if (page.component !== componentName || page.version !== componentVersion.version) {
           componentVersionNavEl.classList.add('hide')
         }
-        buildNavTree(componentVersion.sets, componentVersionNavEl, page, [])
+        var items = componentVersion.sets
+        if (items.length === 1 && !items.content) items = items[0].items
+        if (buildNavTree(items, componentVersionNavEl, page, [])) hasNavTrees = true
         componentsListItemsEl.appendChild(componentVersionNavEl)
       })
-      componentsListEl.appendChild(componentsListItemsEl)
+      if (hasNavTrees) componentsListEl.appendChild(componentsListItemsEl)
     })
     groupEl.appendChild(componentsListEl)
     container.appendChild(groupEl)
