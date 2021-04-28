@@ -1,6 +1,6 @@
 = Couchbase Documentation UI
 // Variables:
-:current-release: sandbox-7
+:current-release: sandbox-8
 // Settings:
 :!example-caption:
 :experimental:
