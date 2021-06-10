@@ -6,8 +6,7 @@ module.exports = ({ data: { root: { contentCatalog = { resolvePage: () => undefi
   if (navGroups._compiled) return navGroups
   const components = site.components
   const componentNames = Object.keys(components)
-  // automatically register home?
-  const claimed = ['home']
+  const claimed = []
   navGroups = JSON.parse(navGroups).reduce((accum, navGroup) => {
     const componentNamesInGroup = (navGroup.components || []).reduce((matched, componentName) => {
       if (~componentName.indexOf('*')) {
@@ -23,11 +22,19 @@ module.exports = ({ data: { root: { contentCatalog = { resolvePage: () => undefi
   }, [])
   const orphaned = componentNames.filter((it) => claimed.indexOf(it) < 0)
   if (orphaned.length) {
-    const generalGroup = navGroups.find((it) => it.title === 'General')
-    if (generalGroup) {
-      generalGroup.components.push(...orphaned)
-    } else {
-      navGroups.push(compileNavGroup({ title: 'General' }, orphaned, contentCatalog, components))
+    const homeIdx = orphaned.indexOf('home')
+    if (~homeIdx) {
+      const home = orphaned.splice(homeIdx, 1)[0]
+      const homeGroup = navGroups.find((it) => it.title === 'Home')
+      homeGroup
+        ? homeGroup.components.push(home)
+        : navGroups.push(compileNavGroup({ title: 'Home' }, [home], contentCatalog, components))
+    }
+    if (orphaned.length) {
+      const generalGroup = navGroups.find((it) => it.title === 'General')
+      generalGroup
+        ? generalGroup.components.push(...orphaned)
+        : navGroups.push(compileNavGroup({ title: 'General' }, orphaned, contentCatalog, components))
     }
   }
   navGroups._compiled = true
