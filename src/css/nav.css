@@ -137,3 +137,175 @@ a.menu_link {
 a.menu_link.is-current-page {
   color: var(--color-link);
 }
+
+.tutorials-filter .left-sidebar-menu {
+  background-color: var(--color-brand-gray7);
+  position: fixed;
+  width: inherit;
+  font-size: 1rem;
+  line-height: 24px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-border) transparent;
+  height: 100%;
+  z-index: 5;
+  transition: all 0.1s;
+}
+
+.tutorials-filter .nav-menu {
+  overflow-y: auto;
+  height: var(--height-nav);
+}
+
+.tutorials-filter .nav-menu .nav-link,
+.tutorials-filter .nav-menu .nav-text {
+  word-break: break-word;
+  margin-left: 1.25rem;
+}
+
+.tutorials-filter .nav-menu a.nav-link:focus,
+.tutorials-filter .nav-menu a.nav-link:hover {
+  color: var(--color-link);
+}
+
+.tutorials-filter .nav-menu .nav-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.tutorials-filter .nav-menu > .nav-list {
+  margin: 1.5rem 0;
+}
+
+.tutorials-filter a.menu-expand-toggle {
+  display: inline-block;
+  position: absolute;
+  top: 15px;
+  right: -1rem;
+  z-index: 99;
+  font-size: 24px;
+  color: var(--color-brand-blue-secondary);
+  background-color: var(--color-brand-gray7);
+  border-radius: 50%;
+}
+
+.tutorials-filter a.menu-expand-toggle span,
+.tutorials-filter a.menu-expand-toggle .fa-times-circle,
+.tutorials-filter a.collapse-menu span {
+  display: none;
+}
+
+@media screen and (min-width: 993px) {
+  .tutorials-filter.collapse-menu {
+    width: 0;
+  }
+
+  .tutorials-filter.collapse-menu .nav-menu {
+    font-size: 0;
+    display: none;
+  }
+
+  .tutorials-filter.collapse-menu .left-sidebar-menu {
+    border: 0;
+    background-color: transparent;
+  }
+
+  .tutorials-filter.collapse-menu a.menu-expand-toggle {
+    transform: rotate(180deg);
+    right: -1.35rem;
+    opacity: 1;
+    color: var(--color-brand-blue-secondary);
+  }
+
+  .tutorials-filter a.menu-expand-toggle {
+    opacity: 0;
+  }
+
+  .tutorials-filter:hover a.menu-expand-toggle {
+    opacity: 1;
+  }
+
+  .tutorials-filter .left-sidebar-menu {
+    top: var(--height-to-body);
+    margin-bottom: 1.5rem;
+    height: 100%;
+    z-index: var(--z-index-nav);
+  }
+
+  .tutorials-filter .left-sidebar-menu::before {
+    position: absolute;
+    content: '';
+    display: inline-block;
+    width: 1000%;
+    height: 100%;
+    background: var(--color-brand-gray7);
+    top: 0;
+    z-index: 1;
+    left: -1000%;
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .tutorials-filter .left-sidebar-menu {
+    left: 0;
+    top: auto;
+    z-index: 9;
+    transform: translate(-100%, 0);
+  }
+
+  .tutorials-filter.collapse-menu a.menu-expand-toggle {
+    right: -0.8rem;
+    opacity: 1;
+    background-color: transparent;
+    border-radius: 0;
+    top: -3px;
+  }
+
+  .tutorials-filter.collapse-menu .left-sidebar-menu {
+    transform: translate(0, 0);
+  }
+
+  .tutorials-filter .nav-menu {
+    height: calc(100vh - 8.5rem) !important;
+  }
+
+  .tutorials-filter a.menu-expand-toggle {
+    transform: rotate(90deg);
+    right: -4.3rem;
+    opacity: 1;
+    color: #fff;
+    background-color: var(--color-brand-blue-secondary);
+    border-radius: 0;
+    top: 60px;
+    font-size: 18px;
+    padding: 2px 8px;
+    text-decoration: none;
+  }
+
+  .tutorials-filter a.menu-expand-toggle .fa-chevron-circle-left {
+    display: none;
+  }
+
+  .tutorials-filter a.menu-expand-toggle span {
+    display: inline-block;
+  }
+
+  .tutorials-filter.collapse-menu a.menu-expand-toggle .fa-times-circle {
+    display: inline-block;
+    font-size: 26px;
+    color: #ea2328;
+  }
+
+  .tutorials-filter.collapse-menu a.menu-expand-toggle span {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .tutorials-filter a.menu-expand-toggle {
+    right: -3.4rem;
+    top: 60px;
+    font-size: 14px;
+    padding: 2px 5px;
+  }
+}

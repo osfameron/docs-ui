@@ -1,6 +1,15 @@
 ;(function () {
   'use strict'
 
+  var menuExpandToggle = document.querySelector('.menu-expand-toggle')
+  var nav = document.querySelector('nav.nav')
+  if (nav && menuExpandToggle) {
+    menuExpandToggle.addEventListener('click', function (e) {
+      e.preventDefault()
+      nav.classList.toggle('collapse-menu')
+    })
+  }
+
   var navContainer = document.querySelector('.nav-container')
   if (!navContainer) return
   if (!navContainer.querySelector('.components')) {
