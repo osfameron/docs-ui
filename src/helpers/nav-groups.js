@@ -6,6 +6,7 @@ module.exports = ({ data: { root: { contentCatalog = { resolvePage: () => undefi
   if (navGroups._compiled) return navGroups
   const components = site.components
   const componentNames = Object.keys(components)
+  // automatically register home?
   const claimed = ['home']
   navGroups = JSON.parse(navGroups).reduce((accum, navGroup) => {
     const componentNamesInGroup = (navGroup.components || []).reduce((matched, componentName) => {

@@ -2,6 +2,7 @@
   'use strict'
 
   var navContainer = document.querySelector('.nav-container')
+  if (!navContainer) return
   if (!navContainer.querySelector('.components')) {
     var siteNavigationData = window.siteNavigationData.reduce(function (accum, entry) {
       return (accum[entry.name] = entry) && accum
