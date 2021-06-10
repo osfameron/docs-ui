@@ -41,18 +41,17 @@
                   {{#each (nav-groups)}}
                   {{#if ./url}}
                   <li class="nav-item">
-                    <a class="nav-link" href="{{relativize ./url}}">{{{./title}}}</a>
-                  </li>
-                  {{/if}}
-                  {{/each}}
-                  <li class="nav-item">
-                    <a class="nav-link" href="{{relativize site.components.tutorials.url}}">
-                      Tutorials
+                    <a class="nav-link" href="{{relativize ./url}}">
+                      {{{./title}}}
+                      {{#if (eq ./title 'Tutorials')}}
                       <span class="arrow">
                         <i class="fas fa-arrow-right"></i>
                       </span>
+                      {{/if}}
                     </a>
                   </li>
+                  {{/if}}
+                  {{/each}}
                 </ul>
               </div>
               <div class="primary-action">
