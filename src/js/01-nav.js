@@ -46,24 +46,27 @@
       var componentNavData = navData[componentName]
       var hasNavTrees
       var componentsListItemsEl = createElement('li', 'components_list-items')
-      var componentVersionsEl = createElement('div', 'component_list-version')
       // FIXME we would prefer if the navigation data identified the latest version itself
       var selectedVersion = componentName === page.component ? page.version : group.latestVersions[componentName]
-      var componentTitleEl = createElement('span', 'component_list_title')
-      componentTitleEl.appendChild(document.createTextNode(componentNavData.title))
-      componentVersionsEl.appendChild(componentTitleEl)
-      if (selectedVersion !== 'master') {
-        var componentVersionSelectEl = createElement('select', 'version_list')
-        componentNavData.versions.forEach(function (componentVersion) {
-          var optionEl = createElement('option')
-          optionEl.value = componentVersion.version
-          if (componentVersion.version === selectedVersion) optionEl.setAttribute('selected', '')
-          optionEl.appendChild(document.createTextNode(componentVersion.displayVersion || componentVersion.version))
-          componentVersionSelectEl.appendChild(optionEl)
-        })
-        componentVersionsEl.appendChild(componentVersionSelectEl)
+      if (!(componentNavData.title === group.title && group.components.length === 1 &&
+          (!selectedVersion || selectedVersion === 'master'))) {
+        var componentVersionsEl = createElement('div', 'component_list-version')
+        var componentTitleEl = createElement('span', 'component_list_title')
+        componentTitleEl.appendChild(document.createTextNode(componentNavData.title))
+        componentVersionsEl.appendChild(componentTitleEl)
+        if (selectedVersion && selectedVersion !== 'master') {
+          var componentVersionSelectEl = createElement('select', 'version_list')
+          componentNavData.versions.forEach(function (componentVersion) {
+            var optionEl = createElement('option')
+            optionEl.value = componentVersion.version
+            if (componentVersion.version === selectedVersion) optionEl.setAttribute('selected', '')
+            optionEl.appendChild(document.createTextNode(componentVersion.displayVersion || componentVersion.version))
+            componentVersionSelectEl.appendChild(optionEl)
+          })
+          componentVersionsEl.appendChild(componentVersionSelectEl)
+        }
+        componentsListItemsEl.appendChild(componentVersionsEl)
       }
-      componentsListItemsEl.appendChild(componentVersionsEl)
       componentNavData.versions.forEach(function (componentVersion) {
         var componentVersionNavEl = createElement('div', 'version_items')
         componentVersionNavEl.dataset.version = componentVersion.version
