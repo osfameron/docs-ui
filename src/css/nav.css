@@ -105,7 +105,7 @@
 .menu_list > .menu_line {
   font-size: 1.125rem;
   line-height: 1;
-  padding-right: 0.5rem;
+  padding-right: 1rem;
 }
 
 .menu_list[data-depth="0"] > .menu_line {
