@@ -68,7 +68,7 @@ If you are a Couchbase user wanting to develop for applications on the edge
 * https://developer.couchbase.com/documentation/mobile/current/guides/sync-gateway/index.html[Sync Gateway]
 
 [.tile]
-.Couchbase Cloud
+.Couchbase Capella
 * https://info.couchbase.com/rs/302-GJY-034/images/10min_to_Cloud_vF.pdf[Public Cloud]
 * xref:operator::overview.adoc[Autonomous Operator]
 
