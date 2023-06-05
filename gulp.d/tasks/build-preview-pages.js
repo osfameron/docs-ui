@@ -66,21 +66,21 @@ module.exports =
         ),
       ])
         .then(([baseUiModel, { layouts }]) => {
-            const extensions = ((baseUiModel.asciidoc || {}).extensions || []).map((request) => {
+          const extensions = ((baseUiModel.asciidoc || {}).extensions || []).map((request) => {
             ASCIIDOC_ATTRIBUTES[request.replace(/^@|\.js$/, '').replace(/[/]/g, '-') + '-loaded'] = ''
             const extension = require(request)
-            extension.register.call(Asciidoctor.Extensions)
+            extension.register.call(asciidoctor.Extensions)
             return extension
-            })
-            const asciidoc = { extensions }
-            for (const component of baseUiModel.site.components) {
+          })
+          const asciidoc = { extensions }
+          for (const component of baseUiModel.site.components) {
             for (const version of component.versions || []) version.asciidoc = asciidoc
-            }
-            baseUiModel = { ...baseUiModel, env: process.env }
-            delete baseUiModel.asciidoc
-            return [baseUiModel, layouts]
+          }
+          baseUiModel = { ...baseUiModel, env: process.env }
+          delete baseUiModel.asciidoc
+          return [baseUiModel, layouts]
         })
-          .then(([baseUiModel, layouts, iconDefs = new Map()]) =>
+        .then(([baseUiModel, layouts, iconDefs = new Map()]) =>
           vfs
             .src('**/*.adoc', { base: previewSrc, cwd: previewSrc })
             .pipe(
